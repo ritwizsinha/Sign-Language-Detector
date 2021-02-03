@@ -61,7 +61,9 @@ function App() {
           mxIndex = i;
         }
       }
-      !link && setText(text => text + ' ' + (map[mxIndex - 1] === undefined ? ' ' : map[mxIndex-1]));
+      console.log(currentSign.current);
+      !link && setText(text => text + '\n' + ((map[mxIndex - 1] === undefined || mx == 0) ? ' ' : map[mxIndex - 1]));
+      currentSign.current = new Array(10).fill(0);
     }, 3000)
   };
 
@@ -112,6 +114,10 @@ function App() {
   const onClick = (e) => {
     e.preventDefault();
     if (toggle) {
+      var msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      msg.rate = 0.75
+      window.speechSynthesis.speak(msg);
       let mxIndex = -1;
       let mx = -10000
       const map = [one, two, three, four, five, six, seven, eight];
